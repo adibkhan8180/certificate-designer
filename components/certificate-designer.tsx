@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Plus, Trash2, Type, ImageIcon, Eye, FileText, Search } from "lucide-react"
+import { BACKGROUND_IMG } from "@/lib/constants"
 
 // Types
 interface TextElement {
@@ -1398,6 +1399,31 @@ export function CertificateDesigner() {
                         onChange={(e) => updatePageBackground(e.target.value, "image")}
                         placeholder="Enter image URL"
                       />
+                       {BACKGROUND_IMG?.map((template) => {
+                        return (
+                          <Button
+                            key={template._id}
+                            variant={
+                              currentTemplate.id === template._id
+                                ? "default"
+                                : "outline"
+                            }
+                            className="w-full justify-start text-left h-auto p-3"
+                            onClick={() => updatePageBackground(template.imgUrl, "image")}
+                          >
+                            <div
+                              style={{
+                                backgroundImage: `url("${template.imgUrl}")`,
+                                backgroundSize: "cover",
+                                marginTop: 5,
+                                marginBottom: 5,
+                                width: "100%",
+                                height: 150,
+                              }}
+                            />
+                          </Button>
+                        );
+                      })}
                     </div>
                   )}
                 </CardContent>
@@ -1435,7 +1461,7 @@ export function CertificateDesigner() {
                 background:
                   currentPage.backgroundType === "color"
                     ? currentPage.background
-                    : `url(${currentPage.background}) center/cover`,
+                    : `url("${currentPage.background}") center/cover`,
                 cursor: isDragging ? "grabbing" : "default",
                 transform: "scale(0.7)",
                 transformOrigin: "top center",
