@@ -1,3 +1,4 @@
+import { Template_Type } from "@/components/ui/TemplateType";
 import type { Template, PredefinedVariable } from "@/types/certificate";
 
 export const PREDEFINED_VARIABLES: PredefinedVariable[] = [
@@ -183,7 +184,7 @@ export const TEXT_ALIGNMENTS = [
   { value: "right", label: "Right" },
 ];
 
-export const TEMPLATES = [
+export const TEMPLATES: Template_Type[] = [
   {
     _id: "627e023261ea4b597674ea9a",
     templateJson: {
