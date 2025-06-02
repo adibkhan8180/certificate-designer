@@ -198,6 +198,19 @@ export const TEMPLATES = [
             displayScale: 0.7,
           },
           img: "https://truscholar-assets-public.s3.ap-south-1.amazonaws.com/certificateeditor/background/a4landscape/bg4.png",
+          orientationId: 7928816004,
+        },
+        {
+          orientation: {
+            id: "A4LANDSCAPE",
+            label: "A4 Landscape",
+            backgrounds: [],
+            dimensions: { widthCm: 29.7, heightCm: 21 },
+            previewScale: 0.16,
+            displayScale: 0.7,
+          },
+          img: "https://truscholar-assets-public.s3.ap-south-1.amazonaws.com/orgData/5f80bdb33234820a45d9a405/1630996240_testing.jpeg",
+          orientationId: 7928816034,
         },
       ],
       rndElemSet: {
@@ -211,6 +224,7 @@ export const TEMPLATES = [
           rndStyle: { zIndex: 0 },
           imgUrl:
             "https://miro.medium.com/max/1400/1*sHmqYIYMV_C3TUhucHrT4w.png",
+            orientationId: 7928816034,
         },
         "2332322078": {
           elementType: "TEXT",
@@ -226,6 +240,7 @@ export const TEMPLATES = [
             fontWeight: 400,
             fontStyle: "normal",
             textDecoration: "none",
+            orientationId: 7928816034,
           },
         },
         "5705561554": {
@@ -246,6 +261,7 @@ export const TEMPLATES = [
             textDecoration: "none",
             fontFamily: "Sacramento",
           },
+          orientationId: 7928816034,
         },
       },
     },

@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Plus, Trash2, Type, ImageIcon, Eye, FileText, Search } from "lucide-react"
-import { BACKGROUND_IMG } from "@/lib/constants"
+import { BACKGROUND_IMG, TEMPLATES } from "@/lib/constants"
 
 // Types
 interface TextElement {
@@ -1063,6 +1063,31 @@ export function CertificateDesigner() {
                       </div>
                     </Button>
                   ))}
+                  {TEMPLATES?.map((template) => {
+                    return (
+                      <Button
+                        key={template._id}
+                        variant={
+                          currentTemplate.id === template._id
+                            ? "default"
+                            : "outline"
+                        }
+                        className="w-full justify-start text-left h-auto p-3"
+                        onClick={() => handleTemplateSelect(template)}
+                      >
+                        <div
+                          style={{
+                            backgroundImage: `url("${template.imgUrl}")`,
+                            backgroundSize: "cover",
+                            marginTop: 5,
+                            marginBottom: 5,
+                            width: "100%",
+                            height: 150,
+                          }}
+                        />
+                      </Button>
+                    );
+                  })}
                 </CardContent>
               </Card>
             </TabsContent>
