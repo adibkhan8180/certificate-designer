@@ -928,6 +928,32 @@ export function CertificateDesigner() {
     setSelectedElement(null)
   }
 
+  const addPage = () => {
+    const newPage: Page = {
+      id: `page-${Date.now()}`,
+      name: `Page ${currentTemplate.pages.length + 1}`,
+      background: "#ffffff",
+      backgroundType: "color",
+      elements: [],
+      size: "a4-landscape",
+    }
+    setCurrentTemplate({
+      ...currentTemplate,
+      pages: [...currentTemplate.pages, newPage],
+    })
+    setCurrentPageIndex(currentTemplate.pages.length)
+  }
+
+  const deletePage = (pageIndex: number) => {
+    if (currentTemplate.pages.length > 1) {
+      const updatedPages = currentTemplate.pages.filter((_, index) => index !== pageIndex)
+      setCurrentTemplate({ ...currentTemplate, pages: updatedPages })
+      if (currentPageIndex >= updatedPages.length) {
+        setCurrentPageIndex(updatedPages.length - 1)
+      }
+    }
+  }
+
   const updateVariable = (name: string, value: string) => {
     const updatedVariables = currentTemplate.variables.map((variable) =>
       variable.name === name ? { ...variable, value } : variable,
@@ -1358,6 +1384,37 @@ export function CertificateDesigner() {
             </TabsContent>
 
             <TabsContent value="pages" className="space-y-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center justify-between">
+                    Pages
+                    <Button size="sm" onClick={addPage}>
+                      <Plus className="w-4 h-4" />
+                    </Button>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {currentTemplate.pages.map((page, index) => (
+                    <div key={page.id} className="flex items-center gap-2">
+                      <Button
+                        variant={currentPageIndex === index ? "default" : "outline"}
+                        className="flex-1 justify-start"
+                        onClick={() => {
+                          setCurrentPageIndex(index)
+                          setSelectedElement(null)
+                        }}
+                      >
+                        {page.name}
+                      </Button>
+                      {currentTemplate.pages.length > 1 && (
+                        <Button size="sm" variant="outline" onClick={() => deletePage(index)}>
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      )}
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Page Settings</CardTitle>
