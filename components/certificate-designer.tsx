@@ -823,6 +823,7 @@ export function CertificateDesigner() {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const [searchTerm, setSearchTerm] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [tab, setTab] = useState("templates");
 
   // Load template on mount
   useEffect(() => {
@@ -1002,6 +1003,12 @@ export function CertificateDesigner() {
 
   const selectedElementData = selectedElement ? currentPage.elements.find((el) => el.id === selectedElement) : null
 
+  useEffect(() => {
+    if (selectedElementData) {
+      setTab("elements");
+    }
+  }, [selectedElementData]);
+
   const filteredVariables = PREDEFINED_VARIABLES.filter(
     (variable) =>
       variable.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -1025,7 +1032,7 @@ export function CertificateDesigner() {
         <div className="p-4">
           <h1 className="text-2xl font-bold mb-4">Certificate Designer</h1>
 
-          <Tabs defaultValue="templates" className="w-full">
+          <Tabs value={tab} onValueChange={setTab} className="w-full">
             <TabsList className="flex flex-col w-full h-auto">
               <TabsTrigger value="templates" className="w-full">
                 Templates
